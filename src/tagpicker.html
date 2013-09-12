@@ -1,0 +1,11 @@
+<span class="tagpicker" ng-class="{'focused': focused}" ng-click="triggerFocus()">
+  <ul>
+    <li ng-repeat="tag in tags" class="tag">{{tag}} 
+      <span class="delete" ng-click="deleteTag(tag)">x</span> 
+    </li>
+    <li>
+      <input taginput type="text" ng-model="currentTag" 
+        placeholder="add a tag">
+    </li>
+  </ul>
+</span>

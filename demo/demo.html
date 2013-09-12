@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html ng-app="example">
+<head>
+  <meta charset="utf-8">
+  <title>angularjs-tagpicker demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
+  <script src="../src/tagpicker.js"></script>
+  <link rel="stylesheet" href="../src/tagpicker.css" type="text/css">
+</head>
+<body>
+  <style type="text/css">
+    .example {
+      padding: 10px 0;
+    }
+  </style>
+  <script>
+    angular.module('example', ['tagpicker'])
+      .controller('TagPickerDemo', ['$scope', function($scope) {
+        $scope.tags = ['my', 'cool', 'tags'];
+        $scope.moreTags = ['my', "other cool tags"];
+        $scope.comment = { content: "My cool comment", tags: ['nice'] };
+        $scope.anotherComment = { content: "Another cool comment", tags: [] };
+      }]);
+  </script>
+  <div ng-controller="TagPickerDemo">
+    <div class="example">
+      <tagpicker tags="tags"></tagpicker>
+      <div>tags: {{tags}}</div>
+    </div>
+
+    <div class="example">
+      <tagpicker tags="moreTags"></tagpicker>
+      <div>moreTags: {{moreTags}}</div>
+
+    </div>
+
+    <div class="example">
+      <tagpicker tags="comment.tags"></tagpicker>
+      <div>comment: {{comment}}</div>
+    </div>
+
+    <div class="example" style="width: 400px">
+      <tagpicker tags="anotherComment.tags"></tagpicker>
+      <div>anotherComment: {{anotherComment}}</div>
+    </div>
+  </div>
+</body>
+</html>
