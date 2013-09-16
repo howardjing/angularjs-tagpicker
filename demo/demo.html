@@ -21,6 +21,14 @@
         $scope.moreTags = ['my', "other cool tags"];
         $scope.comment = { content: "My cool comment", tags: ['nice'] };
         $scope.anotherComment = { content: "Another cool comment", tags: [] };
+
+        $scope.dumbSearch = function(search) {
+          return [search + " dummb", 'dumbsearch']
+        }
+
+        $scope.dumberSearch = function(searchText) {
+          return [searchText, 'dumberSearch']
+        }
       }]);
   </script>
   <div ng-controller="TagPickerDemo">
@@ -36,12 +44,12 @@
     </div>
 
     <div class="example">
-      <tagpicker tags="comment.tags"></tagpicker>
+      <tagpicker tags="comment.tags" autocomplete="dumberSearch"></tagpicker>
       <div>comment: {{comment}}</div>
     </div>
 
-    <div class="example" style="width: 400px">
-      <tagpicker tags="anotherComment.tags"></tagpicker>
+    <div id="bro" class="example" style="width: 400px">
+      <tagpicker tags="anotherComment.tags" autocomplete="dumbSearch"></tagpicker>
       <div>anotherComment: {{anotherComment}}</div>
     </div>
   </div>

@@ -1,31 +1,59 @@
 .tagpicker {
+  position: relative;
   display: inline-block;
   border: 1px solid #aaa;
   border-radius: 3px;
 }
 
-.tagpicker.focused {
+.tagpicker .results {
+  border: 1px solid;
+  border-top: none;
+  padding: 1px;
+}
+
+.tagpicker.focused,
+.tagpicker .results {
   border-color: #0099ff;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 3px #3399ff;
+}
+
+.tagpicker .results {
+  border-radius: 3px;
+  border-top: none;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .tagpicker ul {
+  width: 100%;
   padding: 0;
   margin: 5px 0;
+  list-style-type: none;
 }
 
-.tagpicker li {
-  display: inline-block;
-  padding: 0;
-  margin: 0 0 0 5px;
+.tagpicker .tag, 
+.tagpicker .new-tag {
+  margin: 0 0 5px 5px;
+}
+
+.tagpicker .result {
+  cursor: pointer;
+  padding: 3px 5px;
+}
+.tagpicker .selected {
+  background-color: #B2ACF5;
 }
 
 .tagpicker .tag {
+  display: inline-block;
   background-color: gray;
-  padding: 5px 10px;
-  margin-bottom: 5px;
-  border-radius: 2px;
   color: #fff;
+  border-radius: 2px;
+  padding: 5px 10px;
+}
+
+.tagpicker .new-tag {
+  display: inline;
 }
 
 .tagpicker .delete {
@@ -39,6 +67,20 @@
 
 .tagpicker .delete:hover {
   cursor: pointer;
+}
+
+.tagpicker .results {
+  /* width and left are calculated like this because */
+  /* otherwise the results are 2px less than the tagpicker wrapper for some reason */
+  /* (seems like a dirty hack, should probably find a better way to do this) */
+  width: calc(100% + 2px);
+  left: -1px;
+  position: absolute;
+  background-color: white;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0 10px;
+  z-index: 1;
 }
 
 /* make the input textfield invisible */
