@@ -1,6 +1,6 @@
 (function() {
   // TODO: should probably extract this into a config setting
-  var minChars = 3;
+  var minChars = 2;
   var hasValidTag = function(currentTag) {
     return currentTag && currentTag.length >= minChars;
   }
@@ -183,7 +183,11 @@
         var minChars = 3;
         var hasAutocomplete = !!scope.autocomplete();
 
+
+
         if (hasAutocomplete) {
+
+          scope.results = { data: [] };
 
           scope.$watch('currentTag', function(value) {
             if (!value) {
@@ -194,17 +198,17 @@
           // query autocomplete function appropriately
           scope.$watch('currentTag', function(value) {
             if (hasValidTag(value)) {
-              scope.results = scope.autocomplete()(value);
+              scope.autocomplete()(value, scope.results);
             } else {
-              scope.results = [];
+              scope.results.data = [];
             }
           })
 
           // insert current user input into results appropriately
-          scope.$watchCollection('results', function(results) {
+          scope.$watchCollection('results.data', function(results) {
             if (hasValidTag(scope.currentTag) && 
               results.indexOf(scope.currentTag) == -1) {
-              scope.results.unshift(scope.currentTag);
+              results.unshift(scope.currentTag);
             }
           })
         }
@@ -212,7 +216,7 @@
         // defining controller methods
         if (hasAutocomplete) {
           this.getSelection = function() {
-            return scope.results[scope.selectedTagIndex];
+            return scope.results.data[scope.selectedTagIndex];
           }
 
           this.selectPrevious = function() {
@@ -222,13 +226,13 @@
           }
 
           this.selectNext = function() {
-            if (scope.selectedTagIndex < scope.results.length -1) {
+            if (scope.selectedTagIndex < scope.results.data.length -1) {
               scope.selectedTagIndex += 1;
             }
           }
 
           this.selectResult = function(result) {
-            scope.selectedTagIndex = scope.results.indexOf(result);
+            scope.selectedTagIndex = scope.results.data.indexOf(result);
           }
         } else { 
           // tagAutocomplete must implement these methods no matter what

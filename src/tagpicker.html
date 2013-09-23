@@ -8,9 +8,9 @@
         ng-model="currentTag" tag-input
       >
     </li>
-    <li class="results" ng-show="results.length > 0">
+    <li class="results" ng-show="results.data.length > 0">
       <ul>
-        <li class="result" ng-repeat="result in results" 
+        <li class="result" ng-repeat="result in results.data" 
           ng-class="{ 'selected': result == getSelection()}"
           ng-mouseover="selectResult(result)"
           ng-mousedown="createNewTag(result)">{{result}}

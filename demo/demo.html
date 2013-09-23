@@ -16,18 +16,20 @@
   </style>
   <script>
     angular.module('example', ['tagpicker'])
-      .controller('TagPickerDemo', ['$scope', function($scope) {
+      .controller('TagPickerDemo', ['$scope', '$timeout', function($scope, $timeout) {
         $scope.tags = ['my', 'cool', 'tags'];
         $scope.moreTags = ['my', "other cool tags"];
         $scope.comment = { content: "My cool comment", tags: ['nice'] };
         $scope.anotherComment = { content: "Another cool comment", tags: [] };
 
-        $scope.dumbSearch = function(search) {
-          return [search + " dummb", 'dumbsearch']
+        $scope.dumbSearch = function(search, results) {
+          results.data = [search + " dummb", 'dumbsearch']
         }
 
-        $scope.dumberSearch = function(searchText) {
-          return [searchText, 'dumberSearch']
+        $scope.dumberSearch = function(searchText, results) {
+          $timeout(function() {
+            results.data = [searchText, 'dumberSearch'];
+          }, 500)
         }
       }]);
   </script>
