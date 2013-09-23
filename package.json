@@ -1,0 +1,11 @@
+{
+  "name": "angularjs-tagpicker",
+  "version": "0.1.0",
+  "author": "Howard Jing",
+  "description": "tagpicker directive for angularjs",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4"
+  }
+}
