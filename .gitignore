@@ -1,2 +1,8 @@
+# from npm
 node_modules/
+
+# from bower
 bower_components/
+
+# compiled tagpicker templates
+templates/*.html.js
