@@ -12,7 +12,7 @@
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: "../src/tagpicker.html",
+      templateUrl: "templates/tagpicker.html",
       scope: {
         tags: '=',
         autocomplete: '&'

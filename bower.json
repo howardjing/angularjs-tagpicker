@@ -1,0 +1,11 @@
+{
+  "name": "angular-tagpicker",
+  "version": "0.1.0",
+  "main": "src/tagpicker.js",
+  "dependencies": {
+    "angular-mocks": "v1.2.0-rc.2"
+  },
+  "devDependencies": {
+    "jquery": "v1.10.2"
+  }
+}

@@ -6,6 +6,10 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.4"
+    "grunt-contrib-jshint": "~0.6.4",
+    "karma": "~0.10",
+    "karma-jasmine" : "~0.1",
+    "karma-ng-html2js-preprocessor": "~0.1",
+    "karma-phantomjs-launcher": "~0.1.0"
   }
 }
