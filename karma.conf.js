@@ -12,7 +12,8 @@ module.exports = function(config) {
 
   // generate js files from html templates
   preprocessors: {
-    'templates/*.html': ['html2js']
+    'templates/*.html': ['html2js'],
+    'src/*.js'  :       ['coverage']
   },
 
   // list of files / patterns to load in the browser
@@ -36,7 +37,7 @@ module.exports = function(config) {
 
   // test results reporter to use
   // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-  reporters: ['progress'],
+  reporters: ['progress', 'coverage'],
 
   // web server port
   port: 9876,

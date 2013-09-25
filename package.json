@@ -7,10 +7,11 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.4",
+    "grunt-html2js": "~0.1.7",
     "karma": "~0.10",
     "karma-jasmine": "~0.1",
     "karma-ng-html2js-preprocessor": "~0.1",
     "karma-phantomjs-launcher": "~0.1.0",
-    "grunt-html2js": "~0.1.7"
+    "karma-coverage": "~0.1.0"
   }
 }

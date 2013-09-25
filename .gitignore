@@ -4,5 +4,8 @@ node_modules/
 # from bower
 bower_components/
 
+# test coverage
+coverage/
+
 # compiled tagpicker templates
 templates/*.html.js
