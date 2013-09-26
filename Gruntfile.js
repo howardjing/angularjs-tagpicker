@@ -4,10 +4,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
 
   grunt.registerTask('default', ['karma:unit', 'watch']);
-  grunt.registerTask('build', ['clean', 'html2js']);
+  grunt.registerTask('build', ['clean', 'concat:dist', 'html2js:dist']);
 
 
   grunt.initConfig({
@@ -17,9 +18,18 @@ module.exports = function(grunt) {
       tasks: ['jshint', 'karma:unit:run']
     },
     jshint: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+      files: [
+        'package.json', 'karma.conf.js', 'bower.json', 'Gruntfile.js', 
+        'src/**/*.js', 'test/**/*.js'
+      ]
     },
     clean: ['dist/'],
+    concat: {
+      dist: {
+        src: ['src/**/*.js'],
+        dest: 'dist/tagpicker.js'
+      }
+    },
     html2js: {
       dist: {
         options: {
