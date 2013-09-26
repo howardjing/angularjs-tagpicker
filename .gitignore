@@ -7,5 +7,7 @@ bower_components/
 # test coverage
 coverage/
 
+dist/
+
 # compiled tagpicker templates
 templates/*.html.js
