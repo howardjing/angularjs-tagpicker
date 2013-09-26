@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <title>angularjs-tagpicker demo</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
-  <script src="../src/tagpicker.js"></script>
-  <link rel="stylesheet" href="../src/tagpicker.css" type="text/css">
+  <script src="tagpicker.js"></script>
+  <script src="tagpicker-templates.html.js"></script>
+  <link rel="stylesheet" href="tagpicker.css" type="text/css">
 </head>
 <body>
   <style type="text/css">
@@ -15,7 +16,7 @@
     }
   </style>
   <script>
-    angular.module('example', ['tagpicker'])
+    angular.module('example', ['tagpicker', 'tagpicker.templates'])
       .controller('TagPickerDemo', ['$scope', '$timeout', function($scope, $timeout) {
         $scope.tags = ['my', 'cool', 'tags'];
         $scope.moreTags = ['my', "other cool tags"];

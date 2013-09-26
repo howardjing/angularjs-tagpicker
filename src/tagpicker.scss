@@ -1,0 +1,83 @@
+/* from bootstrap */
+$input-border-focus: #66afe9 !default;
+$label-info-bg: #5bc0de !default;
+
+/* tagpicker custom */
+$tagpicker-border-color: #ccc !default;
+$tagpicker-tag-bg: $label-info-bg !default;
+$tagpicker-tag-color: #fff !default;
+$tagpicker-selected-bg: #507DC5 !default;
+$tagpicker-selected-color: #fff !default;
+
+.tagpicker.focused {
+  /* copy pasting form-control-focus mixin */
+  $color: $input-border-focus;
+  $color-rgba: rgba(red($color), green($color), blue($color), .6);
+  $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px $color-rgba;
+  border-color: $color;
+  outline: 0;
+  -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+          box-shadow: $shadow;
+}
+
+.tagpicker {
+  height: auto;
+  display: block;
+  border: 1px solid $tagpicker-border-color;
+  padding: 6px 12px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  li.tag,
+  li.new-tag {
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .tag {
+    background-color: $tagpicker-tag-bg;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    color: $tagpicker-tag-color;
+    position: relative;
+  }
+
+  .delete {
+    font-family: sans-serif;
+  }
+
+  .delete:hover {
+    cursor: pointer;
+  }
+
+  input {
+    border: 0;
+  }
+  input:focus{
+    outline: 0;
+  }
+
+  /* autocomplete results */
+  .results {
+    /*border-radius: 3px;*/
+    /*border-top: none;*/
+    width: 100%;
+  }
+
+  li.result {
+    cursor: pointer;
+    padding: 3px 5px;
+  }
+
+  li.selected {
+    background: $tagpicker-selected-bg;
+    color: $tagpicker-selected-color;
+  }
+}

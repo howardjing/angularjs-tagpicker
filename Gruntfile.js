@@ -5,11 +5,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
 
   grunt.registerTask('default', ['karma:unit', 'watch']);
-  grunt.registerTask('build', ['clean', 'concat:dist', 'html2js:dist']);
-
+  grunt.registerTask('build', ['clean', 'concat:dist', 'html2js:dist', 'sass:dist', 'copy:dist']);
+  grunt.registerTask('demo', ['build', 'copy:demo']);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -28,6 +30,36 @@ module.exports = function(grunt) {
       dist: {
         src: ['src/**/*.js'],
         dest: 'dist/tagpicker.js'
+      }
+    },
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['*.scss'],
+          dest: 'dist/',
+          ext: '.css'
+        }]
+      }
+    },
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['*.scss'],
+          dest: 'dist/'
+        }]
+      },
+      demo: {
+        files: [{
+          expand: true,
+          cwd: 'dist',
+          src: ["*"],
+          filter: 'isFile',
+          dest: 'demo'
+        }]
       }
     },
     html2js: {
