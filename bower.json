@@ -4,5 +4,20 @@
   "devDependencies": {
     "angular-mocks": "v1.2.0-rc.2",
     "jquery": "v1.10.2"
-  }
+  },
+  "ignore": [
+    ".sass-cache",
+    "bower_components",
+    "coverage",
+    "demo",
+    "node_modules",
+    "src",
+    "templates",
+    "test",
+    ".gitignore",
+    "Gruntfile.js",
+    "bower.json",
+    "karma.conf.js",
+    "package.json"
+  ]
 }
