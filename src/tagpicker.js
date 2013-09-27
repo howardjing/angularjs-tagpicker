@@ -201,7 +201,8 @@
           });
 
           // insert current user input into results appropriately
-          scope.$watchCollection('results.data', function(results) {
+          scope.$watch('results.data.length', function() {
+            var results = scope.results.data;
             if (hasValidTag(scope.currentTag) && 
               results.indexOf(scope.currentTag) === -1) {
               results.unshift(scope.currentTag);
