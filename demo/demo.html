@@ -19,12 +19,11 @@
     angular.module('example', ['tagpicker', 'tagpicker.templates'])
       .controller('TagPickerDemo', ['$scope', '$timeout', function($scope, $timeout) {
         $scope.tags = ['my', 'cool', 'tags'];
-        $scope.moreTags = ['my', "other cool tags"];
         $scope.comment = { content: "My cool comment", tags: ['nice'] };
         $scope.anotherComment = { content: "Another cool comment", tags: [] };
 
         $scope.dumbSearch = function(search, results) {
-          results.data = [search + " dummb", 'dumbsearch']
+          results.data = [search + " dummy", 'dumbsearch']
         }
 
         $scope.dumberSearch = function(searchText, results) {
@@ -38,29 +37,28 @@
   <div>Dependencies
   <ul>
     <li>angularjs 1.0.8</li>
+    <li>that's it</li>
   </ul>
   </div>
   <div ng-controller="TagPickerDemo">
     <div class="example">
+      <h3>Basic usage</h3>
       <tagpicker tags="tags"></tagpicker>
       <div>tags: {{tags}}</div>
     </div>
 
     <div class="example">
-      <tagpicker tags="moreTags"></tagpicker>
-      <div>moreTags: {{moreTags}}</div>
-
+      <h3>With autocomplete function</h3>
+      <tagpicker tags="comment.tags" autocomplete="dumbSearch"></tagpicker>
+      <div>tags: {{comment.tags}}</div>
     </div>
 
     <div class="example">
-      <tagpicker tags="comment.tags" autocomplete="dumberSearch"></tagpicker>
-      <div>comment: {{comment}}</div>
+      <h3>With laggy autocomplete function</h3>
+      <tagpicker tags="anotherComment.tags" autocomplete="dumberSearch"></tagpicker>
+      <div>tags: {{anotherComment.tags}}</div>
     </div>
 
-    <div id="bro" class="example" style="width: 400px">
-      <tagpicker tags="anotherComment.tags" autocomplete="dumbSearch"></tagpicker>
-      <div>anotherComment: {{anotherComment}}</div>
-    </div>
   </div>
 </body>
 </html>
