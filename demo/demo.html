@@ -17,20 +17,29 @@
   </style>
   <script>
     angular.module('example', ['tagpicker', 'tagpicker.templates'])
-      .controller('TagPickerDemo', ['$scope', '$timeout', function($scope, $timeout) {
+      .controller('TagPickerDemo', ['$scope', '$timeout', '$q', function($scope, $timeout, $q) {
         $scope.tags = ['my', 'cool', 'tags'];
         $scope.comment = { content: "My cool comment", tags: ['nice'] };
+        $scope.moreTags = ['some more', 'tags'];
         $scope.anotherComment = { content: "Another cool comment", tags: [] };
 
-        $scope.dumbSearch = function(search, results) {
-          results.data = [search + " dummy", 'dumbsearch']
-        }
+        $scope.dumbSearch = function(search) {
+          return [search + " dummy", 'dumbsearch'];
+        };
 
-        $scope.dumberSearch = function(searchText, results) {
+        $scope.promiseToSearch = function(search) {
+          var deferred = $q.defer();
           $timeout(function() {
-            results.data = [searchText, 'dumberSearch'];
-          }, 500)
-        }
+            deferred.resolve([search + 'foo']);
+          });
+          return deferred.promise;
+        };
+
+        $scope.dumberSearch = function(searchText) {
+          return $timeout(function() {
+            return [searchText, searchText + ' ' + searchText, 'dumberSearch'];
+          }, 500);
+        };
       }]);
   </script>
   <h1>angularjs-tagpicker</h1>
@@ -42,19 +51,25 @@
   </div>
   <div ng-controller="TagPickerDemo">
     <div class="example">
-      <h3>Basic usage</h3>
+      <h3>Basic usage (no autocomplete function)</h3>
       <tagpicker tags="tags"></tagpicker>
       <div>tags: {{tags}}</div>
     </div>
 
     <div class="example">
-      <h3>With autocomplete function</h3>
+      <h3>With autocomplete function that directly returns array</h3>
       <tagpicker tags="comment.tags" autocomplete="dumbSearch"></tagpicker>
       <div>tags: {{comment.tags}}</div>
     </div>
 
     <div class="example">
-      <h3>With laggy autocomplete function</h3>
+      <h3>With autocomplete function that returns a promise to return an array</h3>
+      <tagpicker tags="moreTags" autocomplete="promiseToSearch"></tagpicker>
+      <div>tags: {{moreTags}}</div>
+    </div>
+
+    <div class="example">
+      <h3>With laggy autocomplete function that returns a promise to return an array</h3>
       <tagpicker tags="anotherComment.tags" autocomplete="dumberSearch"></tagpicker>
       <div>tags: {{anotherComment.tags}}</div>
     </div>

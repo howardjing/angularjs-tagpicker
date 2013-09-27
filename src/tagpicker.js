@@ -174,7 +174,7 @@
   }])
 
   // internal directive for handling autocompletion
-  .directive('tagAutocomplete', function() {
+  .directive('tagAutocomplete', ['$q', function($q) {
     return {
       restrict: 'A',
       controller: ['$scope', function(scope) {
@@ -183,7 +183,7 @@
 
         if (hasAutocomplete) {
 
-          scope.results = { data: [] };
+          scope.results = [];
 
           scope.$watch('currentTag', function(value) {
             if (!value) {
@@ -194,18 +194,21 @@
           // query autocomplete function appropriately
           scope.$watch('currentTag', function(value) {
             if (hasValidTag(value)) {
-              scope.autocomplete()(value, scope.results);
-            } else {
-              scope.results.data = [];
-            }
-          });
 
-          // insert current user input into results appropriately
-          scope.$watch('results.data.length', function() {
-            var results = scope.results.data;
-            if (hasValidTag(scope.currentTag) && 
-              results.indexOf(scope.currentTag) === -1) {
-              results.unshift(scope.currentTag);
+              var autocompleteResults = scope.autocomplete()(value);
+              $q.when(autocompleteResults).then(function(results) {
+                scope.results = results;
+
+                // insert current user input into results appropriately
+                if (hasValidTag(value) && results.indexOf(value) === -1) {
+                  results.unshift(value);
+                }
+              }, function() {
+                scope.results = [];
+              });
+
+            } else {
+              scope.results = [];
             }
           });
         }
@@ -213,7 +216,7 @@
         // defining controller methods
         if (hasAutocomplete) {
           this.getSelection = function() {
-            return scope.results.data[scope.selectedTagIndex];
+            return scope.results[scope.selectedTagIndex];
           };
 
           this.selectPrevious = function() {
@@ -223,13 +226,13 @@
           };
 
           this.selectNext = function() {
-            if (scope.selectedTagIndex < scope.results.data.length -1) {
+            if (scope.selectedTagIndex < scope.results.length -1) {
               scope.selectedTagIndex += 1;
             }
           };
 
           this.selectResult = function(result) {
-            scope.selectedTagIndex = scope.results.data.indexOf(result);
+            scope.selectedTagIndex = scope.results.indexOf(result);
           };
         } else { 
           // tagAutocomplete must implement these methods no matter what
@@ -240,5 +243,5 @@
         }
       }]
     };
-  });
+  }]);
 })();
