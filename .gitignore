@@ -7,9 +7,6 @@ bower_components/
 # test coverage
 coverage/
 
-# compiles files
-dist/
-
 # sass stuff
 .sass-cache
 

@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('default', ['karma:unit', 'watch']);
-  grunt.registerTask('build', ['clean', 'concat:dist', 'html2js:dist', 'sass:dist', 'copy:dist']);
+  grunt.registerTask('build', ['clean', 'concat:dist', 'html2js:dist', 'sass:dist']);
   grunt.registerTask('demo', ['build', 'copy:demo']);
 
   grunt.initConfig({
@@ -44,14 +44,6 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: 'src',
-          src: ['*.scss'],
-          dest: 'dist/'
-        }]
-      },
       demo: {
         files: [{
           expand: true,
@@ -68,7 +60,7 @@ module.exports = function(grunt) {
           base: '.'
         },
         src: ['templates/**/*.html'],
-        dest: 'dist/tagpicker-templates.html.js',
+        dest: 'dist/tagpicker-templates.js',
         module: 'tagpicker.templates'
       }
     },

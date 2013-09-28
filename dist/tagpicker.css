@@ -1,0 +1,49 @@
+/* from bootstrap */
+/* tagpicker custom */
+.tagpicker.focused {
+  /* copy pasting form-control-focus mixin */
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
+
+.tagpicker {
+  height: auto;
+  display: block;
+  border: 1px solid #cccccc;
+  padding: 6px 12px;
+  /* autocomplete results */ }
+  .tagpicker ul {
+    margin: 0;
+    padding: 0; }
+  .tagpicker li {
+    list-style-type: none; }
+  .tagpicker li.tag,
+  .tagpicker li.new-tag {
+    display: inline-block;
+    margin-right: 5px; }
+  .tagpicker .tag {
+    background-color: #5bc0de;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    color: white;
+    position: relative; }
+  .tagpicker .delete {
+    font-family: sans-serif; }
+  .tagpicker .delete:hover {
+    cursor: pointer; }
+  .tagpicker input {
+    border: 0; }
+  .tagpicker input:focus {
+    outline: 0; }
+  .tagpicker .results {
+    /*border-radius: 3px;*/
+    /*border-top: none;*/
+    width: 100%; }
+  .tagpicker li.result {
+    cursor: pointer;
+    padding: 3px 5px; }
+  .tagpicker li.selected {
+    background: #507dc5;
+    color: white; }
