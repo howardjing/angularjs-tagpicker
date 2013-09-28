@@ -182,7 +182,6 @@
         var hasAutocomplete = !!scope.autocomplete();
 
         if (hasAutocomplete) {
-
           scope.results = [];
 
           scope.$watch('currentTag', function(value) {
@@ -191,25 +190,45 @@
             }
           });
 
+          var previousSearch = $q.defer();
+
           // query autocomplete function appropriately
           scope.$watch('currentTag', function(value) {
-            if (hasValidTag(value)) {
+            // the previous search is now invalid so reject it
+            previousSearch.reject();
 
-              var autocompleteResults = scope.autocomplete()(value);
+            // set up the proper behavior for once this search is resolved
+            previousSearch = $q.defer();
+            previousSearch.promise.then(function(results) {
+              scope.results = results;
+            }, function() {
+              scope.results = [];
+            });
+
+            // make sure that we are resolving or rejecting the correct
+            // previous search (if don't have this closure then previousSearch
+            // will reference the latest previousSearch defined, rather than 
+            // the previousSearch created for this currentTag value) 
+            (function(previousSearch) {
+              var autocompleteResults;
+
+              // only execute autocomplete function when there is a valid tag
+              if (hasValidTag(value)) {
+                autocompleteResults = scope.autocomplete()(value);
+              } else {
+                autocompleteResults = [];
+              }
+
               $q.when(autocompleteResults).then(function(results) {
-                scope.results = results;
-
                 // insert current user input into results appropriately
                 if (hasValidTag(value) && results.indexOf(value) === -1) {
                   results.unshift(value);
                 }
+                previousSearch.resolve(results);
               }, function() {
-                scope.results = [];
+                previousSearch.reject();
               });
-
-            } else {
-              scope.results = [];
-            }
+            })(previousSearch);
           });
         }
 
@@ -236,7 +255,9 @@
           };
         } else { 
           // tagAutocomplete must implement these methods no matter what
-          var controllerMethods = ['getSelection', 'selectPrevious', 'selectNext'];
+          var controllerMethods = [
+            'getSelection', 'selectPrevious', 'selectNext'
+          ];
           angular.forEach(controllerMethods, function(method) {
             self[method] = angular.noop;
           });
